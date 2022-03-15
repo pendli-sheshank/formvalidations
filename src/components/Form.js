@@ -16,17 +16,6 @@ export class Formcc extends Component {
     let value = e.target.value;
 
     this.setState({ [name]: value });
-    this.setState({
-      name: "",
-      email: "",
-      number: "",
-      nameError: "",
-      emailErr: "",
-      numberErr: "",
-      nameMatchError: "",
-      emailMatchError: "",
-      numberMatchErr: "",
-    });
   };
 
   validationCheck = (e) => {
@@ -48,14 +37,13 @@ export class Formcc extends Component {
     let reg = /^[a-zA-Z0-9]*$/;
     if (name === "name" && reg.test(value) === false) {
       this.setState({ nameMatchError: "Enter Valid Name" });
-      e.preventDefault();
 
       console.log("Not Valid name");
     }
     let emailreg = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
     if (name === "email" && emailreg.test(value) === false) {
       this.setState({ emailMatchError: "Enter Valid Email" });
-      e.preventDefault();
+
       console.log("Not Valid Email");
     }
 
@@ -64,10 +52,24 @@ export class Formcc extends Component {
       this.setState({ numberMatchErr: "Enter Valid Number" });
       console.log("Not Valid Number");
     }
+    if (name === "number" && value.length !== 10) {
+      this.setState({ numberMatchErr: "Number must at least 10 digits" });
+    } else {
+      console.log("Invalid", value.length);
+    }
   };
 
   onFormSubmit(e) {
     e.preventDefault();
+
+    this.setState({
+      nameError: "",
+      nameMatchError: "",
+      emailError: "",
+      emailMatchError: "",
+      numberError: "",
+      numberMatchErr: "",
+    });
 
     console.log(this.state);
   }
