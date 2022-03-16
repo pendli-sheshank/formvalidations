@@ -7,8 +7,11 @@ export class Formcc extends Component {
     email: "",
     number: "",
     nameError: "",
-
-    numberError: "",
+    nameMatchError: "",
+    emailErr: "",
+    emailMatchError: "",
+    numberErr: "",
+    numberMatchErr: "",
   };
 
   onHandleChange = (e) => {
@@ -62,15 +65,6 @@ export class Formcc extends Component {
   onFormSubmit(e) {
     e.preventDefault();
 
-    this.setState({
-      nameError: "",
-      nameMatchError: "",
-      emailError: "",
-      emailMatchError: "",
-      numberError: "",
-      numberMatchErr: "",
-    });
-
     console.log(this.state);
   }
   render() {
@@ -91,6 +85,7 @@ export class Formcc extends Component {
             <input
               type="text"
               name="name"
+              onFocus={this.onFoucsCheck}
               onBlur={(e) => this.validationCheck(e)}
               onChange={(e) => this.onHandleChange(e)}
               placeholder="Enter your full name"
